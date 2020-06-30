@@ -24,16 +24,16 @@
 			<th>Surname</th>
 			<th>Action</th>
 		</tr>
-		<c:forEach items="${listHotel}" var="order">
+		<c:forEach items="${listCustomer}" var="customer">
 		<tr>
-			<td>${order.id}</td>
-			<td>${order.name}</td>
-			<td>${order.email}</td>
-			<td>${order.surname}</td>
+			<td>${customer.id}</td>
+			<td>${customer.name}</td>
+			<td>${customer.email}</td>
+			<td>${customer.surname}</td>
 			<td>
-				<a href="edit?id=${order.id}">Edit</a>
+				<a href="edit?id=${customer.id}">Edit</a>
 				&nbsp;&nbsp;&nbsp;
-				<a href="delete?id=${order.id}">Delete</a>
+				<a href="delete?id=${customer.id}">Delete</a>
 			</td>
 		</tr>
 		</c:forEach>

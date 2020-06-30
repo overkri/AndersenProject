@@ -15,7 +15,7 @@
 			<table border="0" cellpadding="5">
 				<tr>
 					<td>ID: </td>
-					<td>${hotel.id}
+					<td>${customer.id}
 						<form:hidden path="id"/>
 					</td>
 				</tr>			
@@ -28,7 +28,7 @@
 					<td><form:input path="email" /></td>
 				</tr>
 				<tr>
-					<td>Address: </td>
+					<td>Surname: </td>
 					<td><form:input path="surname" /></td>
 				</tr>		
 				<tr>

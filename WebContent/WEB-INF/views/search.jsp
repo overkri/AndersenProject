@@ -18,12 +18,12 @@
 			<th>E-mail</th>
 			<th>Surname</th>
 		</tr>
-		<c:forEach items="${result}" var="order">
+		<c:forEach items="${result}" var="customer">
 		<tr>
-			<td>${order.id}</td>
-			<td>${order.name}</td>
-			<td>${order.email}</td>
-			<td>${order.surname}</td>
+			<td>${customer.id}</td>
+			<td>${customer.name}</td>
+			<td>${customer.email}</td>
+			<td>${customer.surname}</td>
 		</tr>
 		</c:forEach>
 	</table>
