@@ -2,6 +2,7 @@ package main.service;
 
 import java.util.List;
 
+import main.exceptions.IdNotFoundException;
 import main.repository.TourRepository;
 import main.entity.Tour;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +12,13 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class TourService {
-	@Autowired
-	TourRepository repo;
-	
+
+	private TourRepository repo;
+
+	public TourService(TourRepository repo) {
+		this.repo = repo;
+	}
+
 	public void save(Tour tour) {
 		repo.save(tour);
 	}
@@ -27,10 +32,7 @@ public class TourService {
 	}
 	
 	public void delete(Long id) {
-		repo.deleteById(id);
+		repo.findById(id).orElseThrow(() -> new IdNotFoundException("Not found" + id));
 	}
-	
-	public List<Tour> search(String keyword) {
-		return repo.search(keyword);
-	}
+
 }

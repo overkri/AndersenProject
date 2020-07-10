@@ -2,6 +2,7 @@ package main.service;
 
 import java.util.List;
 
+import main.exceptions.IdNotFoundException;
 import main.repository.CountryRepository;
 import main.entity.Country;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +12,13 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class CountryService {
-	@Autowired
+
 	private CountryRepository repo;
-	
+
+	public CountryService(CountryRepository repo) {
+		this.repo = repo;
+	}
+
 	public void save(Country country) {
 		repo.save(country);
 	}
@@ -23,7 +28,7 @@ public class CountryService {
 	}
 	
 	public Country get(Long id) {
-		return repo.findById(id).get();
+		return repo.findById(id).orElseThrow(()-> new IdNotFoundException("Not found"+ id));
 	}
 	
 	public void delete(Long id) {

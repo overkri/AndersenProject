@@ -9,7 +9,6 @@ import java.util.List;
 
 public interface HotelRepository extends PagingAndSortingRepository<Hotel, Long> {
 	
-	@Query(value = "SELECT c FROM Hotel c WHERE c.name LIKE '%' || :keyword || '%'"
-			+ " OR c.address LIKE '%' || :keyword || '%'")
+	@Query(value = "SELECT c FROM Hotel c WHERE c.name LIKE %:keyword% or c.address LIKE %:keyword% ")
 	List<Hotel> search(@Param("keyword") String keyword);
 }

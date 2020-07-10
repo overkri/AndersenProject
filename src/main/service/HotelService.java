@@ -2,6 +2,7 @@ package main.service;
 
 import java.util.List;
 
+import main.exceptions.IdNotFoundException;
 import main.repository.HotelRepository;
 import main.entity.Hotel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +12,13 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class HotelService {
-	@Autowired
-	HotelRepository repo;
-	
+
+	private HotelRepository repo;
+
+	public HotelService(HotelRepository repo) {
+		this.repo = repo;
+	}
+
 	public void save(Hotel hotel) {
 		repo.save(hotel);
 	}
@@ -23,7 +28,7 @@ public class HotelService {
 	}
 	
 	public Hotel get(Long id) {
-		return repo.findById(id).get();
+		return repo.findById(id).orElseThrow(() -> new IdNotFoundException("Not found" + id));
 	}
 	
 	public void delete(Long id) {

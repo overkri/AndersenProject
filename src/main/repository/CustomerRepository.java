@@ -9,8 +9,8 @@ import java.util.List;
 
 public interface CustomerRepository extends PagingAndSortingRepository<Customer, Long> {
 	
-	@Query(value = "SELECT c FROM Hotel c WHERE c.name LIKE '%' || :keyword || '%'"
-			+ " OR c.email LIKE '%' || :keyword || '%'"
-			+ " OR c.surname LIKE '%' || :keyword || '%'")
+	@Query(value = "SELECT c FROM Customer c WHERE c.name LIKE %:keyword% or c.surname LIKE %:keyword% or c.email LIKE %:keyword%  ")
 	List<Customer> search(@Param("keyword") String keyword);
+
+	
 }
