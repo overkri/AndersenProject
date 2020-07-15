@@ -15,7 +15,7 @@ public class TourController {
 	@Autowired
 	private TourService tourService;
 	
-	@RequestMapping("/")
+	@RequestMapping("/1")
 	public ModelAndView home() {
 		List<Tour> listTour = tourService.listAll();
 		ModelAndView mav = new ModelAndView("index");
@@ -23,20 +23,20 @@ public class TourController {
 		return mav;
 	}
 	
-	@RequestMapping("/new")
+	@RequestMapping("/new1")
 	public String newTourForm(Map<String, Object> model) {
 		Tour tour = new Tour();
 		model.put("tour", tour);
 		return "new_tour";
 	}
 	
-	@RequestMapping(value = "/save", method = RequestMethod.POST)
+	@RequestMapping(value = "/save1", method = RequestMethod.POST)
 	public String saveTour(@ModelAttribute("tour") Tour tour) {
 		tourService.save(tour);
 		return "redirect:/";
 	}
 	
-	@RequestMapping("/edit")
+	@RequestMapping("/edit1")
 	public ModelAndView editTourForm(@RequestParam long id) {
 		ModelAndView mav = new ModelAndView("tour");
 		Tour tour = tourService.get(id);
@@ -45,18 +45,9 @@ public class TourController {
 		return mav;
 	}
 	
-	@RequestMapping("/delete")
+	@RequestMapping("/delete1")
 	public String deleteTourForm(@RequestParam long id) {
 		tourService.delete(id);
 		return "redirect:/";		
 	}
-	
-	@RequestMapping("/search")
-	public ModelAndView search(@RequestParam String keyword) {
-		List<Tour> result = tourService.search(keyword);
-		ModelAndView mav = new ModelAndView("search");
-		mav.addObject("result", result);
-		
-		return mav;		
-	}	
 }

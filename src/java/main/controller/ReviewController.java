@@ -15,7 +15,7 @@ public class ReviewController {
 	@Autowired
 	private ReviewService reviewService;
 	
-	@RequestMapping("/")
+	@RequestMapping("/2")
 	public ModelAndView home() {
 		List<Review> listReview = reviewService.listAll();
 		ModelAndView mav = new ModelAndView("index");
@@ -23,20 +23,20 @@ public class ReviewController {
 		return mav;
 	}
 	
-	@RequestMapping("/new")
+	@RequestMapping("/new2")
 	public String newReviewForm(Map<String, Object> model) {
 		Review review = new Review();
 		model.put("review", review);
 		return "new_review";
 	}
 	
-	@RequestMapping(value = "/save", method = RequestMethod.POST)
+	@RequestMapping(value = "/save2", method = RequestMethod.POST)
 	public String saveReview(@ModelAttribute("review") Review review) {
 		reviewService.save(review);
 		return "redirect:/";
 	}
 	
-	@RequestMapping("/edit")
+	@RequestMapping("/edit2")
 	public ModelAndView editReviewForm(@RequestParam long id) {
 		ModelAndView mav = new ModelAndView("edit_review");
 		Review review = reviewService.get(id);
@@ -45,18 +45,10 @@ public class ReviewController {
 		return mav;
 	}
 	
-	@RequestMapping("/delete")
+	@RequestMapping("/delete2")
 	public String deleteReviewForm(@RequestParam long id) {
 		reviewService.delete(id);
 		return "redirect:/";		
 	}
-	
-	@RequestMapping("/search")
-	public ModelAndView search(@RequestParam String keyword) {
-		List<Review> result = reviewService.search(keyword);
-		ModelAndView mav = new ModelAndView("search");
-		mav.addObject("result", result);
-		
-		return mav;		
-	}	
+
 }

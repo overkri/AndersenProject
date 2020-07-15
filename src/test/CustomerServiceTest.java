@@ -1,4 +1,4 @@
-package test;
+
 
 import main.entity.Customer;
 import main.repository.CustomerRepository;
@@ -47,7 +47,7 @@ class CustomerServiceTest {
     }
 
     @Test
-    void save() {
+    void saveEntity() {
         Customer customer = new Customer();
         customer.setEmail(CUSTOMER_EMAIL);
         customer.setName(CUSTOMER_NAME);
@@ -68,7 +68,7 @@ class CustomerServiceTest {
     }
 
     @Test
-    void get() {
+    void getEntityByIdTest() {
         Customer customer = customerService.get(ID);
         ArgumentCaptor<Long> captor = ArgumentCaptor.forClass(Long.class);
         CustomerService customerServiceOther = mock(CustomerService.class);
@@ -82,7 +82,7 @@ class CustomerServiceTest {
     }
 
     @Test
-    void delete() {
+    void deleteEntityByIdTest() {
         ArgumentCaptor<Long> captor = ArgumentCaptor.forClass(Long.class);
         CustomerService customerServiceOther = mock(CustomerService.class);
         customerServiceOther.delete(ID);
@@ -90,7 +90,7 @@ class CustomerServiceTest {
     }
 
     @Test
-    void search() {
+    void searchEntityByIdTest() {
         List<Customer> searchList = new ArrayList<>();
         List<Customer> returned = customerService.search(CUSTOMER_NAME);
         assertEquals(searchList, returned);

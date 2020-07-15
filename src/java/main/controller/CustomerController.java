@@ -3,9 +3,13 @@ package main.controller;
 import main.entity.Customer;
 import main.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -23,17 +27,18 @@ public class CustomerController {
 		return mav;
 	}
 	
-	@RequestMapping("/new")
-	public String newCustomerForm(Map<String, Object> model) {
+	@RequestMapping("/new_customer")
+	public ModelAndView newCustomerForm(Map<String, Object> model) {
+		ModelAndView mav = new ModelAndView("new_customer");
 		Customer customer = new Customer();
 		model.put("customer", customer);
-		return "new_customer";
+		return mav;
 	}
 	
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public String saveCustomer(@ModelAttribute("customer") Customer customer) {
+	public void saveCustomer(@ModelAttribute("customer") Customer customer, HttpServletResponse httpResponse) throws IOException {
 		customerService.save(customer);
-		return "redirect:/";
+		httpResponse.sendRedirect("/");
 	}
 	
 	@RequestMapping("/edit")
@@ -41,14 +46,13 @@ public class CustomerController {
 		ModelAndView mav = new ModelAndView("edit_customer");
 		Customer customer = customerService.get(id);
 		mav.addObject("customer", customer);
-		
 		return mav;
 	}
 	
 	@RequestMapping("/delete")
-	public String deleteCustomerForm(@RequestParam long id) {
+	public void deleteCustomerForm(@RequestParam long id, HttpServletResponse httpResponse ) throws IOException {
 		customerService.delete(id);
-		return "redirect:/";		
+		httpResponse.sendRedirect("/");
 	}
 	
 	@RequestMapping("/search")
@@ -56,7 +60,6 @@ public class CustomerController {
 		List<Customer> result = customerService.search(keyword);
 		ModelAndView mav = new ModelAndView("search");
 		mav.addObject("result", result);
-		
 		return mav;		
 	}	
 }

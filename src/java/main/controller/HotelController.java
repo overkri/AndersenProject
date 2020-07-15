@@ -15,7 +15,7 @@ public class HotelController {
 	@Autowired
 	private HotelService hotelService;
 	
-	@RequestMapping("/")
+	@RequestMapping("/4")
 	public ModelAndView home() {
 		List<Hotel> listHotel = hotelService.listAll();
 		ModelAndView mav = new ModelAndView("index");
@@ -23,20 +23,20 @@ public class HotelController {
 		return mav;
 	}
 	
-	@RequestMapping("/new")
+	@RequestMapping("/new4")
 	public String newHotelForm(Map<String, Object> model) {
 		Hotel hotel = new Hotel();
 		model.put("hotel", hotel);
 		return "new_hotel";
 	}
 	
-	@RequestMapping(value = "/save", method = RequestMethod.POST)
+	@RequestMapping(value = "/save4", method = RequestMethod.POST)
 	public String saveHotel(@ModelAttribute("hotel") Hotel hotel) {
 		hotelService.save(hotel);
 		return "redirect:/";
 	}
 	
-	@RequestMapping("/edit")
+	@RequestMapping("/edit4")
 	public ModelAndView editHotelForm(@RequestParam long id) {
 		ModelAndView mav = new ModelAndView("edit_hotel");
 		Hotel hotel = hotelService.get(id);
@@ -45,13 +45,13 @@ public class HotelController {
 		return mav;
 	}
 	
-	@RequestMapping("/delete")
+	@RequestMapping("/delete4")
 	public String deleteHotelForm(@RequestParam long id) {
 		hotelService.delete(id);
 		return "redirect:/";		
 	}
 	
-	@RequestMapping("/search")
+	@RequestMapping("/search4")
 	public ModelAndView search(@RequestParam String keyword) {
 		List<Hotel> result = hotelService.search(keyword);
 		ModelAndView mav = new ModelAndView("search");

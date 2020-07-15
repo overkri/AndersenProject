@@ -15,7 +15,7 @@ public class OrderController {
 	@Autowired
 	private OrderService orderService;
 	
-	@RequestMapping("/")
+	@RequestMapping("/3")
 	public ModelAndView home() {
 		List<Order> listOrder = orderService.listAll();
 		ModelAndView mav = new ModelAndView("index");
@@ -23,20 +23,20 @@ public class OrderController {
 		return mav;
 	}
 	
-	@RequestMapping("/new")
+	@RequestMapping("/new3")
 	public String newOrderForm(Map<String, Object> model) {
 		Order order = new Order();
 		model.put("order", order);
 		return "new_order";
 	}
 	
-	@RequestMapping(value = "/save", method = RequestMethod.POST)
+	@RequestMapping(value = "/save3", method = RequestMethod.POST)
 	public String saveOrder(@ModelAttribute("order") Order order) {
 		orderService.save(order);
 		return "redirect:/";
 	}
 	
-	@RequestMapping("/edit")
+	@RequestMapping("/edit3")
 	public ModelAndView editOrderForm(@RequestParam long id) {
 		ModelAndView mav = new ModelAndView("edit_order");
 		Order order = orderService.get(id);
@@ -45,18 +45,10 @@ public class OrderController {
 		return mav;
 	}
 	
-	@RequestMapping("/delete")
+	@RequestMapping("/delete3")
 	public String deleteOrderForm(@RequestParam long id) {
 		orderService.delete(id);
 		return "redirect:/";		
 	}
-	
-	@RequestMapping("/search")
-	public ModelAndView search(@RequestParam String keyword) {
-		List<Order> result = orderService.search(keyword);
-		ModelAndView mav = new ModelAndView("search");
-		mav.addObject("result", result);
-		
-		return mav;		
-	}	
+
 }

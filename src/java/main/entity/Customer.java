@@ -1,18 +1,22 @@
 package main.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "Customer")
 public class Customer {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_Customer", nullable = false)
 	private Long id;
 
+	@Column(name = "Customer_name")
 	private String name;
+
+	@Column(name = "Customer_surname")
 	private String email;
+
+	@Column(name = "Customer_email")
 	private String surname;
 
 	public Customer() {

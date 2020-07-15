@@ -15,7 +15,7 @@ public class CountryController {
 	@Autowired
 	private CountryService countryService;
 	
-	@RequestMapping("/")
+	@RequestMapping("/5")
 	public ModelAndView home() {
 		List<Country> listCountry = countryService.listAll();
 		ModelAndView mav = new ModelAndView("index");
@@ -23,20 +23,20 @@ public class CountryController {
 		return mav;
 	}
 	
-	@RequestMapping("/new")
+	@RequestMapping("/new5")
 	public String newCountryForm(Map<String, Object> model) {
 		Country country = new Country();
 		model.put("country", country);
 		return "new_country";
 	}
 	
-	@RequestMapping(value = "/save", method = RequestMethod.POST)
+	@RequestMapping(value = "/save5", method = RequestMethod.POST)
 	public String saveCountry(@ModelAttribute("customer") Country country) {
 		countryService.save(country);
 		return "redirect:/";
 	}
 	
-	@RequestMapping("/edit")
+	@RequestMapping("/edit5")
 	public ModelAndView editCountryForm(@RequestParam long id) {
 		ModelAndView mav = new ModelAndView("edit_country");
 		Country country = countryService.get(id);
@@ -45,13 +45,13 @@ public class CountryController {
 		return mav;
 	}
 	
-	@RequestMapping("/delete")
+	@RequestMapping("/delete5")
 	public String deleteCountryForm(@RequestParam long id) {
 		countryService.delete(id);
 		return "redirect:/";		
 	}
 	
-	@RequestMapping("/search")
+	@RequestMapping("/search5")
 	public ModelAndView search(@RequestParam String keyword) {
 		List<Country> result = countryService.search(keyword);
 		ModelAndView mav = new ModelAndView("search");
