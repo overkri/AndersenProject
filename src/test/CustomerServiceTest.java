@@ -1,8 +1,8 @@
 
 
-import main.entity.Customer;
-import main.repository.CustomerRepository;
-import main.service.CustomerService;
+import main.java.entity.Customer;
+import main.java.repository.CustomerRepository;
+import main.java.service.CustomerService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
